@@ -14,7 +14,7 @@
 	<artifactId>simply-ecommerce</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>simply-ecommerce</name>
-	<description>A S imply Ecommerce Spring Boot</description>
+	<description>A Simply Ecommerce Spring Boot</description>
 
 	<!-- Propriedades -->
 	<properties>
