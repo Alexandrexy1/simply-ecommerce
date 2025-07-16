@@ -1,13 +1,12 @@
-package com.studyingalex.simply_ecommerce;
+package com.studyingalex.simply_ecommerce.entities;
 
-import com.studyingalex.simply_ecommerce.entities.Order;
 import jakarta.persistence.*;
 
 import java.time.Instant;
 
 @Entity
 @Table(name = "tb_payment")
-public class Payment {
+public final class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

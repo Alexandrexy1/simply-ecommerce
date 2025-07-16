@@ -1,6 +1,5 @@
 package com.studyingalex.simply_ecommerce.entities;
 
-import com.studyingalex.simply_ecommerce.Payment;
 import com.studyingalex.simply_ecommerce.entities.enums.OrderStatus;
 import jakarta.persistence.*;
 
