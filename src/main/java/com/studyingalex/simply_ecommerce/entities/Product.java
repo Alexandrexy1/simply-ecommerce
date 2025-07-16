@@ -2,6 +2,9 @@ package com.studyingalex.simply_ecommerce.entities;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "tb_product")
 public final class Product {
@@ -9,9 +12,18 @@ public final class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
+
+    @Column(columnDefinition = "TEXT")
     private String description;
+
     private double price;
     private String imageUrl;
+
+    @ManyToMany
+    @JoinTable(name = "tb_product_category",
+        joinColumns = @JoinColumn(name = "product_id"),
+        inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private final Set<Category> categories = new HashSet<>();
 
     public Product() {}
 
@@ -56,5 +68,9 @@ public final class Product {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
     }
 }
