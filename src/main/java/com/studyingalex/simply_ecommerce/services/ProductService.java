@@ -6,10 +6,10 @@ import com.studyingalex.simply_ecommerce.exceptions.ResourceNotFoundException;
 import com.studyingalex.simply_ecommerce.repositories.ProductRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 public class ProductService {
@@ -20,9 +20,9 @@ public class ProductService {
     private ModelMapper modelMapper;
 
     @Transactional(readOnly = true)
-    public List<ProductDTO> findAll() {
-        List<Product> products = repository.findAll();
-        return products.stream().map(x -> modelMapper.map(x, ProductDTO.class)).toList();
+    public Page<ProductDTO> findAll(Pageable pageable) {
+        Page<Product> products = repository.findAll(pageable);
+        return products.map(x -> modelMapper.map(x, ProductDTO.class));
     }
 
     @Transactional(readOnly = true)
