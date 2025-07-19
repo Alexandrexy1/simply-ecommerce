@@ -30,5 +30,12 @@ public class ProductService {
         Product product = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado com id: " + id));
         return modelMapper.map(product, ProductDTO.class);
     }
+
+    @Transactional
+    public ProductDTO insert(ProductDTO dto) {
+        Product product = modelMapper.map(dto, Product.class);
+        product = repository.save(product);
+        return modelMapper.map(product, ProductDTO.class);
+    }
 }
 
