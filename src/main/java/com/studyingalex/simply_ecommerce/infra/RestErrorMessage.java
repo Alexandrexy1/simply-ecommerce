@@ -2,7 +2,7 @@ package com.studyingalex.simply_ecommerce.infra;
 
 import org.springframework.http.HttpStatus;
 
-public class RestErrorMessage {
+public final class RestErrorMessage {
     private HttpStatus status;
     private String message;
 

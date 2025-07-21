@@ -4,6 +4,7 @@ import com.studyingalex.simply_ecommerce.dto.ProductDTO;
 import com.studyingalex.simply_ecommerce.entities.Product;
 import com.studyingalex.simply_ecommerce.exceptions.ResourceNotFoundException;
 import com.studyingalex.simply_ecommerce.repositories.ProductRepository;
+import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -35,7 +36,23 @@ public class ProductService {
     public ProductDTO insert(ProductDTO dto) {
         Product product = modelMapper.map(dto, Product.class);
         product = repository.save(product);
+
         return modelMapper.map(product, ProductDTO.class);
+    }
+
+    @Transactional
+    public ProductDTO update(ProductDTO dto, long id) {
+        Product product = repository.getReferenceById(id);
+        modelMapper.map(dto, product);
+        product = repository.save(product);
+
+        return modelMapper.map(product, ProductDTO.class);
+    }
+
+    @Transactional
+    public void delete(long id) {
+        if (!repository.existsById(id)) throw new ResourceNotFoundException("Produto não encontrado com id: " + id);
+        repository.deleteById(id);
     }
 }
 
